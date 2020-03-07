@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack"
+    tools:context=".SplashActivitySignIn">
+
+
+    <Button
+        android:id="@+id/buttonSignIn"
+        android:layout_width="85dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="@font/alegreya_black_italic"
+        android:onClick="emailSignIn"
+        android:text="@string/sign_up"
+        android:textColor="@color/colorPurple"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.894"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonSignUn"
+        app:layout_constraintVertical_bias="0.86" />
+
+    <TextView
+        android:id="@+id/textFire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/alegreya_black_italic"
+        android:text="@string/fire"
+        android:textColor="@color/colorPurple"
+        android:textSize="100sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextEmailPReset"
+        android:layout_width="304dp"
+        android:layout_height="102dp"
+        android:backgroundTint="@color/colorWhite"
+        android:backgroundTintMode="src_over"
+        android:ems="10"
+        android:fontFamily="@font/alegreya_black_italic"
+        android:hint="@string/fui_email_hint"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="#B7FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textFire"
+        app:layout_constraintVertical_bias="0.13999999"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/buttonSignUn"
+        style="@style/FirebaseUI.Button"
+        android:layout_width="85dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="@font/alegreya_black_italic"
+        android:onClick="emailSignIn"
+        android:text="@string/common_signin_button_text"
+        android:textColor="@color/colorPurple"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintVertical_bias="0.04000002"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:cornerRadius="15dp" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="309dp"
+        android:layout_height="105dp"
+        android:backgroundTint="@color/colorWhite"
+        android:backgroundTintMode="src_over"
+        android:ems="10"
+        android:fontFamily="@font/alegreya_black_italic"
+        android:hint="@string/fui_password_hint"
+        android:inputType="textPassword"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="#B7FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignIn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailPReset"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#00FFFFFF"
+        android:fontFamily="@font/alegreya_black_italic"
+        android:onClick="passwordReset"
+        android:text="Forgot Password?"
+        android:textColor="@color/colorPurple"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".894"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

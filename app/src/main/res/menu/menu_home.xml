@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group
+        android:enabled="true"
+        android:menuCategory="system">
+
+        <item
+            android:id="@+id/search"
+            android:enabled="false"
+            android:title="@android:string/search_go"
+            app:actionViewClass="android.widget.SearchView"
+            app:showAsAction="ifRoom" />
+
+        <item
+            android:id="@+id/action_add"
+            android:enabled="true"
+            android:icon="@drawable/sharp_add_to_photos_white_24dp"
+            android:title="@string/add"
+            android:visible="true"
+            app:showAsAction="always|withText" />
+        <item
+            android:id="@+id/action_settings"
+            android:icon="@drawable/sharp_settings_white_24dp"
+            android:orderInCategory="100"
+            android:title="@string/settings"
+            app:showAsAction="ifRoom" />
+
+
+    </group>
+
+
+
+</menu>

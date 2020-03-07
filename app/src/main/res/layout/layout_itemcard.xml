@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="30sp"
+    android:layout_marginTop="10sp"
+    android:layout_marginRight="30sp"
+    android:layout_marginBottom="10sp"
+    android:background="#000000"
+    app:cardBackgroundColor="@color/colorSilver"
+    app:cardCornerRadius="15dp"
+    app:contentPaddingBottom="10sp"
+    app:contentPaddingLeft="30sp"
+    app:contentPaddingRight="30sp"
+    app:contentPaddingTop="10sp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/relativeLayout"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:background="@color/colorSilver"
+        android:padding="16dp">
+
+        <TextView
+
+            android:id="@+id/itemName"
+
+            android:layout_width="236dp"
+
+            android:layout_height="39dp"
+
+            android:fontFamily="@font/alegreya_black_italic"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/cities" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clickable="false"
+            android:isIndicator="true"
+            android:progressBackgroundTint="@color/colorDarkSlateGrey"
+            android:progressTint="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

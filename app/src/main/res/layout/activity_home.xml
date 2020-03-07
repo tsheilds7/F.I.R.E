@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPurple">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout"
+        android:layout_width="match_parent"
+        android:layout_height="659dp">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="657dp"
+            android:layout_marginTop="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0">
+
+        </androidx.viewpager.widget.ViewPager>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/layoutBarTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarTop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPurple"
+            android:clickable="false"
+            android:theme="@style/CustomFont"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:titleTextColor="@color/colorWhite" />
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/layoutBarBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarBottom"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPurple"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="#FFFFFF"
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed"
+            app:tabTextAppearance="@style/CustomTabText"
+            app:tabTextColor="@color/colorWhite">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabPodcasts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/sharp_mic_white_24"
+                android:text="@string/podcast" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabYoutube"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/sharp_tv_white_24"
+                android:text="@string/youtube" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabBooks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/sharp_menu_book_white_24"
+                android:text="@string/books" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabPros"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/sharp_person_white_24"
+                android:text="@string/pros" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabBlogs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_horizontal"
+                android:icon="@drawable/sharp_edit_white_24"
+                android:text="@string/blogs" />
+        </com.google.android.material.tabs.TabLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
