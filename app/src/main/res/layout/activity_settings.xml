@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPurple"
+    android:background="@color/colorSilver"
     tools:context=".SettingsActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -14,15 +14,15 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPurple"
         android:foregroundTint="@color/colorPurple"
-        android:tint="@color/colorPurple"
-        app:backgroundTint="@color/colorWhite"
+        android:tint="@color/colorWhite"
+        app:backgroundTint="@color/colorPurple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.96"
-        app:srcCompat="@drawable/sharp_arrow_back_white_18dp" />
+        app:srcCompat="@drawable/sharp_home_white_18dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -31,7 +31,7 @@
         android:layout_marginTop="32dp"
         android:fontFamily="@font/alegreya_black_italic"
         android:text="Profile"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorBlack"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
-        android:background="#FFFFFF"
+        android:background="@color/colorPurple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -55,7 +55,7 @@
         android:layout_marginBottom="32dp"
         android:fontFamily="@font/alegreya_black_italic"
         android:text="Current Email"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorBlack"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,9 +68,9 @@
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginTop="64dp"
-        android:background="#FFFFFF"
-        android:backgroundTint="@color/colorWhite"
-        android:foregroundTint="@color/colorWhite"
+        android:background="@color/colorPurple"
+        android:backgroundTint="@color/colorPurple"
+        android:foregroundTint="@color/colorPurple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
@@ -82,7 +82,7 @@
         android:background="@drawable/rounded_button"
         android:fontFamily="@font/alegreya_black_italic"
         android:text="@string/com_facebook_loginview_log_out_action"
-        android:textColor="@color/colorPurple"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".8"
@@ -94,10 +94,10 @@
         android:id="@+id/adView"
         android:layout_width="355dp"
         android:layout_height="436dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"/>
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

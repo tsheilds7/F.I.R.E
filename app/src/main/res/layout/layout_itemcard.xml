@@ -9,7 +9,7 @@
     android:layout_marginRight="30sp"
     android:layout_marginBottom="10sp"
     android:background="#000000"
-    app:cardBackgroundColor="@color/colorSilver"
+    app:cardBackgroundColor="@color/colorPurple"
     app:cardCornerRadius="15dp"
     app:contentPaddingBottom="10sp"
     app:contentPaddingLeft="30sp"
@@ -24,7 +24,7 @@
 
         android:layout_height="wrap_content"
 
-        android:background="@color/colorSilver"
+        android:background="@color/colorPurple"
         android:padding="16dp">
 
         <TextView

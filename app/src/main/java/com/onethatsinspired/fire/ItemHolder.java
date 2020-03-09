@@ -377,6 +377,7 @@ class ItemHolder extends RecyclerView.ViewHolder
 
                                                     ratingBarAvgInfo.setRating(Integer.parseInt(ultraRating));
 
+                                                    
 
                                                 }
                                             });

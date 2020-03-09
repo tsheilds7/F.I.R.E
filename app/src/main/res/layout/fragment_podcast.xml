@@ -5,9 +5,8 @@
     android:id="@+id/frameLayoutPodcast"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPurple"
+    android:background="@color/colorSilver"
     tools:context=".PodcastFragment">
-
 
 
     <androidx.recyclerview.widget.RecyclerView
