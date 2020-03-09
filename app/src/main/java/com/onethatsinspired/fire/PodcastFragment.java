@@ -1,6 +1,5 @@
 package com.onethatsinspired.fire;
 
-
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -28,8 +27,6 @@ import com.onethatsinspired.fire.databinding.FragmentPodcastBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -38,7 +35,7 @@ public class PodcastFragment extends Fragment
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private CollectionReference collectionReference = db.collection("podcast");
+    CollectionReference collectionReference = db.collection("podcast");
 
     private FragmentPodcastBinding fragmentPodcastBinding;
 
@@ -55,7 +52,6 @@ public class PodcastFragment extends Fragment
         // Required empty public constructor
 
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -89,8 +85,6 @@ public class PodcastFragment extends Fragment
         super.onCreate(savedBundleInstance);
     }
 
-
-
     @Override
     public void onStart()
     {
@@ -108,7 +102,6 @@ public class PodcastFragment extends Fragment
     {
         void onFragmentInteraction(Uri uri);
     }
-
 
     public  void resetFragment(int index)
     {
@@ -179,7 +172,5 @@ public class PodcastFragment extends Fragment
             }
         });
     }
-
-
 
 }

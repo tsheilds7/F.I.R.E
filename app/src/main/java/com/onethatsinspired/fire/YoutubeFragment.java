@@ -35,7 +35,7 @@ public class YoutubeFragment extends Fragment
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private CollectionReference collectionReference = db.collection("youtube");
+    CollectionReference collectionReference = db.collection("youtube");
 
     private FragmentYoutubeBinding fragmentYoutubeBinding;
 
@@ -75,13 +75,13 @@ public class YoutubeFragment extends Fragment
 
         recyclerView.setLayoutManager(layoutManager);
 
-        setUpData();
+        setUpData(collectionReference);
     }
 
 
 
 
-    public void setUpData()
+    public void setUpData(CollectionReference collectionReference)
     {
 
         if((!fireViewModelList.isEmpty()) || (adapter != null))
@@ -89,6 +89,8 @@ public class YoutubeFragment extends Fragment
             fireViewModelList.clear();
             adapter.notifyDataSetChanged();
         }
+
+        Query query =  collectionReference.orderBy("avgrating",Query.Direction.DESCENDING);
 
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
         {

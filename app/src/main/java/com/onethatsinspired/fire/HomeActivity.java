@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.PagerAdapter;
@@ -55,11 +56,19 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
 
     private CollectionReference collectionReference;
 
-    ActivityHomeBinding activityHomeBinding;
+    //ActivityHomeBinding activityHomeBinding;
 
     TabLayout tabLayout;
 
     HomePagerAdapter homeAdapter;
+
+    MenuItem add_button;
+
+    MenuItem settings_button;
+
+    Menu mainMenu;
+
+    CoordinatorLayout coordinatorLayout;
 
     @Override
     public  void onCreate(Bundle savedInstanceState)
@@ -87,7 +96,7 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
 
          tabLayout = findViewById(R.id.tabs);
 
-
+         coordinatorLayout = findViewById(R.id.homeLayout);
 
      }
 
@@ -97,6 +106,12 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
 
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
+
+        mainMenu = menu;
+
+        add_button = mainMenu.getItem(0);
+
+        settings_button = mainMenu.getItem(1);
 
         // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -303,25 +318,25 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
                         collectionReference = db.collection("youtube");
                         homeAdapter.youtubeFragment.fireViewModelList.clear();
                         homeAdapter.youtubeFragment.adapter.notifyDataSetChanged();
-                        homeAdapter.youtubeFragment.setUpData();
+                        homeAdapter.youtubeFragment.setUpData(collectionReference);
                         break;
                     case 2:
                         collectionReference = db.collection("book");
                         homeAdapter.booksFragment.fireViewModelList.clear();
                         homeAdapter.booksFragment.adapter.notifyDataSetChanged();
-                        homeAdapter.booksFragment.setUpData();
+                        homeAdapter.booksFragment.setUpData(collectionReference);
                         break;
                     case 3:
                         collectionReference = db.collection("pro");
                         homeAdapter.prosFragment.fireViewModelList.clear();
                         homeAdapter.prosFragment.adapter.notifyDataSetChanged();
-                        homeAdapter.prosFragment.setUpData();
+                        homeAdapter.prosFragment.setUpData(collectionReference);
                         break;
                     case 4:
                         collectionReference = db.collection("blog");
                         homeAdapter.blogsFragment.fireViewModelList.clear();
                         homeAdapter.blogsFragment.adapter.notifyDataSetChanged();
-                        homeAdapter.blogsFragment.setUpData();
+                        homeAdapter.blogsFragment.setUpData(collectionReference);
                         break;
                 }
 
@@ -340,7 +355,6 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
         switch (item.getItemId())
         {
             case R.id.search:
-
                 return true;
             case R.id.action_add:
                 Intent i = new Intent(this,AddDataActivity.class);
@@ -363,7 +377,6 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
     private void configureTabLayout()
     {
         tabLayout = findViewById(R.id.tabs);
-
 
         final ViewPager viewPager = findViewById(R.id.viewpager);
 
@@ -403,6 +416,7 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
             {
 
             }
+
         });
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener()
@@ -430,8 +444,39 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
 
     }
 
-    public  void resetRecyclerAdapter()
+    public  void resetRecyclerAdapter(int itemPosition)
     {
-        adapter.reset();
+
+        switch (tabLayout.getSelectedTabPosition())
+        {
+            case 0:
+                homeAdapter.podcastFragment.adapter.notifyItemChanged(itemPosition);
+                homeAdapter.podcastFragment.setUpData(homeAdapter.podcastFragment.collectionReference);
+                homeAdapter.podcastFragment.adapter.notifyDataSetChanged();
+                break;
+            case 1:
+                homeAdapter.youtubeFragment.adapter.notifyItemChanged(itemPosition);
+                homeAdapter.youtubeFragment.setUpData(homeAdapter.youtubeFragment.collectionReference);
+                homeAdapter.youtubeFragment.adapter.notifyDataSetChanged();
+                break;
+            case 2:
+                homeAdapter.booksFragment.adapter.notifyItemChanged(itemPosition);
+                homeAdapter.booksFragment.setUpData(homeAdapter.booksFragment.collectionReference);
+                homeAdapter.booksFragment.adapter.notifyDataSetChanged();
+                break;
+            case 3:
+                homeAdapter.prosFragment.adapter.notifyItemChanged(itemPosition);
+                homeAdapter.prosFragment.setUpData(homeAdapter.prosFragment.collectionReference);
+                homeAdapter.prosFragment.adapter.notifyDataSetChanged();
+                break;
+            case 4:
+                homeAdapter.blogsFragment.adapter.notifyItemChanged(itemPosition);
+                homeAdapter.blogsFragment.setUpData(homeAdapter.blogsFragment.collectionReference);
+                homeAdapter.blogsFragment.adapter.notifyDataSetChanged();
+                break;
+        }
+
+
+        //adapter.notifyDataSetChanged();
     }
 }

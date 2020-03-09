@@ -35,7 +35,7 @@ public class ProsFragment extends Fragment
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private CollectionReference collectionReference = db.collection("pro");
+    CollectionReference collectionReference = db.collection("pro");
 
     private FragmentProsBinding fragmentProsBinding;
 
@@ -74,12 +74,12 @@ public class ProsFragment extends Fragment
 
         recyclerView.setLayoutManager(layoutManager);
 
-        setUpData();
+        setUpData(collectionReference);
     }
 
 
 
-    public void setUpData()
+    public void setUpData(CollectionReference collectionReference)
     {
         if((!fireViewModelList.isEmpty()) || (adapter != null))
         {
@@ -87,6 +87,7 @@ public class ProsFragment extends Fragment
             adapter.notifyDataSetChanged();
         }
 
+        Query query =  collectionReference.orderBy("avgrating",Query.Direction.DESCENDING);
 
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
         {

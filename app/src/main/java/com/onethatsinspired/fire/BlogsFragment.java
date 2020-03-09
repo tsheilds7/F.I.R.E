@@ -35,7 +35,7 @@ public class BlogsFragment extends Fragment
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private CollectionReference collectionReference = db.collection("blog");
+    CollectionReference collectionReference = db.collection("blog");
 
     private FragmentBlogsBinding fragmentBlogsBinding;
 
@@ -75,12 +75,12 @@ public class BlogsFragment extends Fragment
 
         recyclerView.setLayoutManager(layoutManager);
 
-        setUpData();
+        setUpData(collectionReference);
     }
 
 
 
-    public void setUpData()
+    public void setUpData(CollectionReference collectionReference)
     {
         if((!fireViewModelList.isEmpty()) || (adapter != null))
         {
@@ -88,6 +88,8 @@ public class BlogsFragment extends Fragment
             adapter.notifyDataSetChanged();
         }
 
+
+        Query query =  collectionReference.orderBy("avgrating",Query.Direction.DESCENDING);
 
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
         {

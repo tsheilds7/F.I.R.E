@@ -35,7 +35,7 @@ public class BooksFragment extends Fragment
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private CollectionReference collectionReference = db.collection("book");
+    CollectionReference collectionReference = db.collection("book");
 
     private FragmentBooksBinding fragmentBooksBinding;
 
@@ -66,7 +66,7 @@ public class BooksFragment extends Fragment
 
 
 
-    public void setUpData()
+    public void setUpData(CollectionReference collectionReference)
     {
 
         if((!fireViewModelList.isEmpty()) || (adapter != null))
@@ -118,7 +118,7 @@ public class BooksFragment extends Fragment
 
         recyclerView.setLayoutManager(layoutManager);
 
-        setUpData();
+        setUpData(collectionReference);
     }
 
     @Override

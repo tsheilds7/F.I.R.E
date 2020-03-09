@@ -51,7 +51,7 @@
             android:layout_marginTop="8dp"
             android:clickable="false"
             android:isIndicator="true"
-            android:progressBackgroundTint="@color/colorDarkSlateGrey"
+            android:progressBackgroundTint="@color/colorBlack"
             android:progressTint="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

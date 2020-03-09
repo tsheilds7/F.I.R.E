@@ -60,9 +60,11 @@ class ItemHolder extends RecyclerView.ViewHolder
 
     HomeActivity homeActivity;
 
+    RatingBar ratingBarAvgInfo;
 
     public ItemHolder(final View itemView)
     {
+
         super(itemView);
 
         textViewName = itemView.findViewById(R.id.itemName);
@@ -90,7 +92,6 @@ class ItemHolder extends RecyclerView.ViewHolder
 
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
 
-
         final TabLayout tabLayout = view.getRootView().findViewById(R.id.tabs);
 
         tabLayout.getTabAt(0).view.setEnabled(false);
@@ -109,7 +110,9 @@ class ItemHolder extends RecyclerView.ViewHolder
 
         view.getRootView().findViewById(R.id.action_settings).setEnabled(false);
 
-        view.getRootView().setAlpha(0.35f);
+        //view.getRootView().setAlpha(0.35f);
+
+        homeActivity.coordinatorLayout.setAlpha(0.35f);
 
         // Inflate the custom layout/view
         final View popupView = inflater.inflate(R.layout.layout_itemdetail,null);
@@ -132,7 +135,7 @@ class ItemHolder extends RecyclerView.ViewHolder
         TextView textViewLiink = popupView.findViewById(R.id.textViewLink);
         textViewLiink.setTypeface(typeface);
 
-        RatingBar ratingBarAvgInfo = popupView.findViewById(R.id.ratingBarAverageInfo);
+        ratingBarAvgInfo = popupView.findViewById(R.id.ratingBarAverageInfo);
 
         TextView textViewAbout = popupView.findViewById(R.id.textViewDescription);
         textViewAbout.setTypeface(typeface);
@@ -168,9 +171,13 @@ class ItemHolder extends RecyclerView.ViewHolder
             public void onClick(View v)
             {
                 Uri uri = Uri.parse( "https://" +   link); // missing 'http://' will cause crashed
+
                 Context context = v.getContext();
+
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 context.startActivity(intent);
             }
         });
@@ -180,7 +187,7 @@ class ItemHolder extends RecyclerView.ViewHolder
             @Override
             public void onClick(View v)
             {
-                TabLayout tabLayout = view.getRootView().findViewById(R.id.tabs);
+                TabLayout tabLayout = homeActivity.tabLayout;
 
                 resetSettings(view,tabLayout);
 
@@ -200,13 +207,11 @@ class ItemHolder extends RecyclerView.ViewHolder
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots)
                     {
-
                         DocumentReference documentReference =  firebaseFirestore.collection(ultraType).document(queryDocumentSnapshots.getDocuments().get(0).getId());
 
                         RatingBar newRatingBar = popupView.findViewById(R.id.ratingBarSubmit);
 
                         addRating(documentReference,(int)newRatingBar.getRating());
-
                     }
                 });
             }
@@ -219,7 +224,9 @@ class ItemHolder extends RecyclerView.ViewHolder
     {
         view.setVisibility(View.VISIBLE);
 
-        view.getRootView().setAlpha(1.0f);
+        //view.getRootView().setAlpha(1.0f);
+
+        homeActivity.coordinatorLayout.setAlpha(1.0f);
 
         tabLayout.getTabAt(0).view.setEnabled(true);
 
@@ -231,9 +238,9 @@ class ItemHolder extends RecyclerView.ViewHolder
 
         tabLayout.getTabAt(4).view.setEnabled(true);
 
-        view.getRootView().findViewById(R.id.action_add).setEnabled(true);
+        homeActivity.add_button.setEnabled(true);
 
-        view.getRootView().findViewById(R.id.action_settings).setEnabled(true);
+        homeActivity.settings_button.setEnabled(true);
     }
 
 
@@ -242,7 +249,7 @@ class ItemHolder extends RecyclerView.ViewHolder
     {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        final String profile = firebaseUser.getEmail().toString();
+        final String profile = firebaseUser.getEmail();
 
         Task<QuerySnapshot> addedbyuser = documentReference.collection("ratings").get();
 
@@ -253,31 +260,33 @@ class ItemHolder extends RecyclerView.ViewHolder
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots)
             {
+
                 for(QueryDocumentSnapshot q : queryDocumentSnapshots)
                 {
-
-
-
                     String name = (String)q.get("addedbyuser");
-
-
-
 
                     if( profile.equals(q.get("addedbyuser")))
                     {
                         alreadyAdded = true;
+
                         Log.e("Database","Rating already left by user");
+
                         Toast toast = Toast.makeText(getApplicationContext(),"Sorry you've already left a review!",Toast.LENGTH_SHORT);
+
                         View v = toast.getView();
+
                         // v.setBackgroundColor(Color.parseColor("#6200EE"));
 
                         //Gets the actual oval background of the Toast then sets the colour filter
                         v.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
 
-                        //Gets the TextView from the Toast so it can be editted
+                        //Gets the TextView from the Toast so it can be edited
                         TextView text = v.findViewById(android.R.id.message);
+
                         text.setTextColor(Color.WHITE);
+
                         text.setTextSize(24);
+
                         toast.show();
 
                     }
@@ -337,42 +346,47 @@ class ItemHolder extends RecyclerView.ViewHolder
                                         @Override
                                         public void onSuccess(DocumentReference documentReference)
                                         {
+
                                             documentReference.getParent().getParent().update("avgrating", String.valueOf((int)rate)).addOnSuccessListener(new OnSuccessListener<Void>()
                                             {
+
                                                 @Override
                                                 public void onSuccess(Void aVoid)
                                                 {
                                                     Toast toast = Toast.makeText(getApplicationContext(),"Rating Submitted!",Toast.LENGTH_SHORT);
+
                                                     View v = toast.getView();
+
                                                     // v.setBackgroundColor(Color.parseColor("#6200EE"));
 
                                                     //Gets the actual oval background of the Toast then sets the colour filter
+
                                                     v.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
 
-                                                    //Gets the TextView from the Toast so it can be editted
+                                                    //Gets the TextView from the Toast so it can be edited
+
                                                     TextView text = v.findViewById(android.R.id.message);
+
                                                     text.setTextColor(Color.WHITE);
+
                                                     text.setTextSize(24);
+
                                                     toast.show();
 
-                                                    homeActivity.resetRecyclerAdapter();
+                                                    homeActivity.resetRecyclerAdapter(getLayoutPosition());
+
+                                                    ratingBarAvgInfo.setRating(Integer.parseInt(ultraRating));
+
 
                                                 }
                                             });
                                         }
                                     });
-
                                 }
                             });
-
-
                         }
                     });
                 }
-
-
-
-
             }
         });
 
