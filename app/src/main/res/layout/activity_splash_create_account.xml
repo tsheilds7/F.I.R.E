@@ -58,7 +58,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/F_Trans" />
+        app:srcCompat="@drawable/f_trans" />
 
     <EditText
         android:id="@+id/editTextEmailPReset"

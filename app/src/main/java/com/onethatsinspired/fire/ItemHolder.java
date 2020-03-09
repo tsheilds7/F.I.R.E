@@ -62,10 +62,14 @@ class ItemHolder extends RecyclerView.ViewHolder
 
     RatingBar ratingBarAvgInfo;
 
+    View view;
+
     public ItemHolder(final View itemView)
     {
 
         super(itemView);
+
+        resetData(itemView);
 
         textViewName = itemView.findViewById(R.id.itemName);
 
@@ -76,12 +80,18 @@ class ItemHolder extends RecyclerView.ViewHolder
             @Override
             public void onClick(View v)
             {
+
                 showPopup(v);
             }
         });
 
         homeActivity = (HomeActivity)itemView.getContext();
 
+    }
+
+    public  void resetData(View itemView)
+    {
+        view = itemView;
     }
 
 
@@ -207,11 +217,19 @@ class ItemHolder extends RecyclerView.ViewHolder
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots)
                     {
+
                         DocumentReference documentReference =  firebaseFirestore.collection(ultraType).document(queryDocumentSnapshots.getDocuments().get(0).getId());
 
                         RatingBar newRatingBar = popupView.findViewById(R.id.ratingBarSubmit);
 
                         addRating(documentReference,(int)newRatingBar.getRating());
+
+                        popupWindow.dismiss();
+
+                        TabLayout tabLayout = homeActivity.tabLayout;
+
+                        resetSettings(view,tabLayout);
+
                     }
                 });
             }
@@ -377,7 +395,8 @@ class ItemHolder extends RecyclerView.ViewHolder
 
                                                     ratingBarAvgInfo.setRating(Integer.parseInt(ultraRating));
 
-                                                    
+
+
 
                                                 }
                                             });
