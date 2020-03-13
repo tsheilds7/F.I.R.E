@@ -1,4 +1,4 @@
-package com.onethatsinspired.fire;
+package com.onethatsinspired.fire.controllers.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,10 +19,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.onethatsinspired.fire.R;
 
 public class SplashActivityCreateAccount extends AppCompatActivity
 {
-
 
     private FirebaseAuth mAuth;
 
@@ -41,8 +41,6 @@ public class SplashActivityCreateAccount extends AppCompatActivity
     CallbackManager callbackManager;
 
     GoogleApiClient mGoogleSignInClient;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -84,7 +82,6 @@ public class SplashActivityCreateAccount extends AppCompatActivity
         Intent i = new Intent(this,SplashActivitySignIn.class);
         startActivity(i, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }
-
 
     public void emailSignUp(final View view)
     {

@@ -1,20 +1,25 @@
-package com.onethatsinspired.fire;
+package com.onethatsinspired.fire.adapters;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.onethatsinspired.fire.controllers.fragments.BlogsFragment;
+import com.onethatsinspired.fire.controllers.fragments.BooksFragment;
+import com.onethatsinspired.fire.controllers.fragments.PodcastFragment;
+import com.onethatsinspired.fire.controllers.fragments.ProsFragment;
+import com.onethatsinspired.fire.controllers.fragments.YoutubeFragment;
 
 public class HomePagerAdapter extends FragmentPagerAdapter
 {
     int tabCount;
 
-    PodcastFragment podcastFragment;
-    YoutubeFragment youtubeFragment;
-    BooksFragment booksFragment;
-    ProsFragment prosFragment;
-    BlogsFragment blogsFragment;
+    public PodcastFragment podcastFragment;
+    public YoutubeFragment youtubeFragment;
+    public BooksFragment booksFragment;
+    public ProsFragment prosFragment;
+    public BlogsFragment blogsFragment;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 

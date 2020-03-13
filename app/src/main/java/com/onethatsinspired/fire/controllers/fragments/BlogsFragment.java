@@ -1,4 +1,4 @@
-package com.onethatsinspired.fire;
+package com.onethatsinspired.fire.controllers.fragments;
 
 
 import android.net.Uri;
@@ -20,7 +20,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.onethatsinspired.fire.databinding.FragmentYoutubeBinding;
+import com.onethatsinspired.fire.controllers.activities.HomeActivity;
+import com.onethatsinspired.fire.R;
+import com.onethatsinspired.fire.adapters.RecyclerAdapter;
+import com.onethatsinspired.fire.databinding.FragmentBlogsBinding;
 import com.onethatsinspired.fire.viewmodels.FireViewModel;
 
 import java.util.ArrayList;
@@ -30,27 +33,27 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class YoutubeFragment extends Fragment
+public class BlogsFragment extends Fragment
 {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    CollectionReference collectionReference = db.collection("youtube");
+    public CollectionReference collectionReference = db.collection("blog");
 
-    private FragmentYoutubeBinding fragmentYoutubeBinding;
+    private FragmentBlogsBinding fragmentBlogsBinding;
 
     Query query =  collectionReference.orderBy("avgrating",Query.Direction.DESCENDING);
 
-    RecyclerView recyclerView;
+    public RecyclerView recyclerView;
 
-    RecyclerView.LayoutManager layoutManager;
+     RecyclerView.LayoutManager layoutManager;
 
-    RecyclerAdapter adapter;
+    public RecyclerAdapter adapter;
 
-    List<FireViewModel> fireViewModelList = new ArrayList<>();
+    public List<FireViewModel> fireViewModelList = new ArrayList<>();
 
 
-    public YoutubeFragment()
+    public BlogsFragment()
     {
         // Required empty public constructor
     }
@@ -59,9 +62,9 @@ public class YoutubeFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        fragmentYoutubeBinding = FragmentYoutubeBinding.inflate(inflater,container,false);
-        View view = fragmentYoutubeBinding.getRoot();
-        return view;
+       fragmentBlogsBinding = FragmentBlogsBinding.inflate(inflater,container,false);
+       View view = fragmentBlogsBinding.getRoot();
+       return view;
     }
 
     @Override
@@ -69,7 +72,7 @@ public class YoutubeFragment extends Fragment
     {
         super.onActivityCreated(savedInstanceState);
 
-        recyclerView = getActivity().findViewById(R.id.recyclerViewYoutube);
+        recyclerView = getActivity().findViewById(R.id.recyclerViewBlogs);
 
         layoutManager = new LinearLayoutManager(getContext());
 
@@ -80,15 +83,14 @@ public class YoutubeFragment extends Fragment
 
 
 
-
     public void setUpData(CollectionReference collectionReference)
     {
-
         if((!fireViewModelList.isEmpty()) || (adapter != null))
         {
             fireViewModelList.clear();
             adapter.notifyDataSetChanged();
         }
+
 
         Query query =  collectionReference.orderBy("avgrating",Query.Direction.DESCENDING);
 
@@ -124,7 +126,6 @@ public class YoutubeFragment extends Fragment
         });
     }
 
-
     @Override
     public void onStart()
     {
@@ -137,6 +138,7 @@ public class YoutubeFragment extends Fragment
     public void onStop()
     {
         super.onStop();
+
     }
 
     public interface OnFragmentInteractionListener

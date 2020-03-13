@@ -1,4 +1,4 @@
-package com.onethatsinspired.fire;
+package com.onethatsinspired.fire.controllers.fragments;
 
 
 import android.net.Uri;
@@ -20,7 +20,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.onethatsinspired.fire.databinding.FragmentBlogsBinding;
+import com.onethatsinspired.fire.controllers.activities.HomeActivity;
+import com.onethatsinspired.fire.R;
+import com.onethatsinspired.fire.adapters.RecyclerAdapter;
+import com.onethatsinspired.fire.databinding.FragmentBooksBinding;
 import com.onethatsinspired.fire.viewmodels.FireViewModel;
 
 import java.util.ArrayList;
@@ -30,66 +33,49 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BlogsFragment extends Fragment
+public class BooksFragment extends Fragment
 {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    CollectionReference collectionReference = db.collection("blog");
+    public CollectionReference collectionReference = db.collection("book");
 
-    private FragmentBlogsBinding fragmentBlogsBinding;
+    private FragmentBooksBinding fragmentBooksBinding;
 
     Query query =  collectionReference.orderBy("avgrating",Query.Direction.DESCENDING);
 
-     RecyclerView recyclerView;
+    public RecyclerView recyclerView;
 
-     RecyclerView.LayoutManager layoutManager;
+    RecyclerView.LayoutManager layoutManager;
 
-    RecyclerAdapter adapter;
+    public RecyclerAdapter adapter;
 
-    List<FireViewModel> fireViewModelList = new ArrayList<>();
+    public List<FireViewModel> fireViewModelList = new ArrayList<>();
 
 
-    public BlogsFragment()
-    {
+    public BooksFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-       fragmentBlogsBinding = FragmentBlogsBinding.inflate(inflater,container,false);
-       View view = fragmentBlogsBinding.getRoot();
-       return view;
+       fragmentBooksBinding = FragmentBooksBinding.inflate(inflater,container,false);
+       View view = fragmentBooksBinding.getRoot();
+       return  view;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState)
-    {
-        super.onActivityCreated(savedInstanceState);
-
-        recyclerView = getActivity().findViewById(R.id.recyclerViewBlogs);
-
-        layoutManager = new LinearLayoutManager(getContext());
-
-        recyclerView.setLayoutManager(layoutManager);
-
-        setUpData(collectionReference);
-    }
 
 
 
     public void setUpData(CollectionReference collectionReference)
     {
+
         if((!fireViewModelList.isEmpty()) || (adapter != null))
         {
             fireViewModelList.clear();
             adapter.notifyDataSetChanged();
         }
-
-
-        Query query =  collectionReference.orderBy("avgrating",Query.Direction.DESCENDING);
 
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>()
         {
@@ -123,11 +109,27 @@ public class BlogsFragment extends Fragment
         });
     }
 
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState)
+    {
+        super.onActivityCreated(savedInstanceState);
+
+        recyclerView = getActivity().findViewById(R.id.recyclerViewBooks);
+
+        layoutManager = new LinearLayoutManager(getContext());
+
+        recyclerView.setLayoutManager(layoutManager);
+
+        setUpData(collectionReference);
+    }
+
     @Override
     public void onStart()
     {
 
         super.onStart();
+        //adapter.startListening();
 
     }
 
@@ -135,7 +137,7 @@ public class BlogsFragment extends Fragment
     public void onStop()
     {
         super.onStop();
-
+        //adapter.stopListening();
     }
 
     public interface OnFragmentInteractionListener

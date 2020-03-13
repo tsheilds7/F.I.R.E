@@ -1,4 +1,4 @@
-package com.onethatsinspired.fire;
+package com.onethatsinspired.fire.controllers.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
+import com.onethatsinspired.fire.R;
 
 public class ForgotPassWordActivity extends AppCompatActivity
 {

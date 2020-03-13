@@ -1,4 +1,4 @@
-package com.onethatsinspired.fire;
+package com.onethatsinspired.fire.controllers.activities;
 
 
 import android.app.SearchManager;
@@ -33,8 +33,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import com.onethatsinspired.fire.R;
+
+import com.onethatsinspired.fire.adapters.HomePagerAdapter;
+
+import com.onethatsinspired.fire.adapters.RecyclerAdapter;
+
+import com.onethatsinspired.fire.controllers.fragments.BlogsFragment;
+import com.onethatsinspired.fire.controllers.fragments.BooksFragment;
+import com.onethatsinspired.fire.controllers.fragments.PodcastFragment;
+import com.onethatsinspired.fire.controllers.fragments.ProsFragment;
+import com.onethatsinspired.fire.controllers.fragments.YoutubeFragment;
+
 import com.onethatsinspired.fire.viewmodels.FireViewModel;
-import com.onethatsinspired.fire.adapters.*;
 
 import android.widget.SearchView;
 
@@ -43,8 +54,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class HomeActivity extends AppCompatActivity implements PodcastFragment.OnFragmentInteractionListener,YoutubeFragment.OnFragmentInteractionListener,
-        BooksFragment.OnFragmentInteractionListener,ProsFragment.OnFragmentInteractionListener,BlogsFragment.OnFragmentInteractionListener
+public class HomeActivity extends AppCompatActivity implements PodcastFragment.OnFragmentInteractionListener, YoutubeFragment.OnFragmentInteractionListener,
+        BooksFragment.OnFragmentInteractionListener, ProsFragment.OnFragmentInteractionListener, BlogsFragment.OnFragmentInteractionListener
 {
 
     private FirebaseFirestore db;
@@ -53,23 +64,21 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
 
     private CollectionReference collectionReference;
 
-    //ActivityHomeBinding activityHomeBinding;
-
-    TabLayout tabLayout;
+    public TabLayout tabLayout;
 
     HomePagerAdapter homeAdapter;
 
-    MenuItem add_button;
+    public MenuItem add_button;
 
-    MenuItem settings_button;
+    public MenuItem settings_button;
 
     Menu mainMenu;
 
-    CoordinatorLayout coordinatorLayout;
+    public CoordinatorLayout coordinatorLayout;
 
     Client client;
 
-    Index index;
+    public Index index;
 
     @Override
     public  void onCreate(Bundle savedInstanceState)

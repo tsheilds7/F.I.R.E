@@ -1,4 +1,4 @@
-package com.onethatsinspired.fire;
+package com.onethatsinspired.fire.adapters;
 
 import android.content.Context;
 
@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.onethatsinspired.fire.controllers.activities.HomeActivity;
+import com.onethatsinspired.fire.controllers.views.ItemHolder;
+import com.onethatsinspired.fire.R;
 import com.onethatsinspired.fire.viewmodels.FireViewModel;
 
 import java.util.List;
@@ -30,8 +33,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ItemHolder>
 
         this.fireViewModelList = fireviewModelList;
     }
-
-
 
     /**** View Holder Functions ****/
 
@@ -70,17 +71,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ItemHolder>
         return fireViewModelList.size();
     }
 
-
-
     public  void reset()
     {
         notifyDataSetChanged();
     }
 
-
-
 }
-
-
-
-

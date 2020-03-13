@@ -15,22 +15,22 @@
         android:roundIcon="@mipmap/ic_launcher_fire_purple_2_round"
         android:supportsRtl="true"
         android:theme="@style/CustomTheme">
-        <activity android:name=".ForgotPassWordActivity"></activity>
+        <activity android:name=".controllers.activities.ForgotPassWordActivity"></activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-6031188943467510~2935394497" />
 
         <activity
-            android:name=".SplashActivityCreateAccount"
+            android:name=".controllers.activities.SplashActivityCreateAccount"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"></activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".controllers.activities.SettingsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"></activity>
         <activity
-            android:name=".SplashActivitySignIn"
+            android:name=".controllers.activities.SplashActivitySignIn"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".controllers.activities.HomeActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
 
@@ -52,7 +52,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".AddDataActivity"
+            android:name=".controllers.activities.AddDataActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity"></activity>
 

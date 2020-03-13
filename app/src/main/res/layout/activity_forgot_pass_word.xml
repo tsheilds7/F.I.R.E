@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorSilver"
     android:backgroundTint="@color/colorSilver"
-    tools:context=".ForgotPassWordActivity">
+    tools:context=".controllers.activities.ForgotPassWordActivity">
 
     <TextView
         android:id="@+id/textViewEmailPasswordReset"
