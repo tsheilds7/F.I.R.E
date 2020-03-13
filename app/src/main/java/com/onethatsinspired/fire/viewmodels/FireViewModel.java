@@ -1,4 +1,4 @@
-package com.onethatsinspired.fire;
+package com.onethatsinspired.fire.viewmodels;
 
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +8,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 public class FireViewModel extends ViewModel
 {
@@ -19,7 +21,7 @@ public class FireViewModel extends ViewModel
 
     private  String name;
 
-
+    private String objectid;
 
     private  String type;
 
@@ -28,7 +30,7 @@ public class FireViewModel extends ViewModel
 
     }
 
-    public FireViewModel(String about, String avgrating, String link, String name,  String type)
+    public FireViewModel(String about, String avgrating, String link, String name, String type, @Nullable String objectid)
     {
         this.about = about;
 
@@ -39,6 +41,8 @@ public class FireViewModel extends ViewModel
         this.name = name;
 
         this.type = type;
+
+        this.objectid = objectid;
     }
 
     public String getAbout() { return about; }
@@ -53,4 +57,6 @@ public class FireViewModel extends ViewModel
     }
 
     public String getType() { return type; }
+
+    public String getObjectID() {return objectid;}
 }

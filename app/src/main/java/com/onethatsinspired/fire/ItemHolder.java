@@ -21,6 +21,9 @@ import android.widget.Toast;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.algolia.search.saas.AlgoliaException;
+import com.algolia.search.saas.Client;
+import com.algolia.search.saas.Index;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
@@ -32,6 +35,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,6 +80,7 @@ class ItemHolder extends RecyclerView.ViewHolder
         textViewName = itemView.findViewById(R.id.itemName);
 
         ratingBarAverage = itemView.findViewById(R.id.ratingBar);
+
 
         itemView.setOnClickListener(new View.OnClickListener()
         {
@@ -321,7 +328,7 @@ class ItemHolder extends RecyclerView.ViewHolder
                     documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
                     {
                         @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot)
+                        public void onSuccess(final DocumentSnapshot documentSnapshot)
                         {
 
                             documentSnapshot.get("avgrating");
@@ -353,7 +360,7 @@ class ItemHolder extends RecyclerView.ViewHolder
 
                                     rate = (sum + rating) / (numberOfData + 1);
 
-                                    Map<String, Object> ratingInput = new HashMap<>();
+                                    final Map<String, Object> ratingInput = new HashMap<>();
 
                                     ratingInput.put("rate", String.valueOf((int)rating));
                                     ratingInput.put("addedbyuser", firebaseUser.getEmail());
@@ -362,15 +369,32 @@ class ItemHolder extends RecyclerView.ViewHolder
                                     {
 
                                         @Override
-                                        public void onSuccess(DocumentReference documentReference)
+                                        public void onSuccess(final DocumentReference documentReference)
                                         {
 
                                             documentReference.getParent().getParent().update("avgrating", String.valueOf((int)rate)).addOnSuccessListener(new OnSuccessListener<Void>()
                                             {
-
+                                                String objectID;
                                                 @Override
                                                 public void onSuccess(Void aVoid)
                                                 {
+
+
+                                                           objectID = documentSnapshot.get("objectid").toString();
+                                                            try
+                                                            {
+                                                                homeActivity.index.partialUpdateObjectAsync(new JSONObject("{\"avgrating\" : " + (int)rate + " }"), objectID,true,null);                                                            }
+                                                            catch(JSONException e)
+                                                            {
+                                                                e.printStackTrace();
+                                                            }
+
+
+
+
+
+
+
                                                     Toast toast = Toast.makeText(getApplicationContext(),"Rating Submitted!",Toast.LENGTH_SHORT);
 
                                                     View v = toast.getView();

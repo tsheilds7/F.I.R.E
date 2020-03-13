@@ -13,9 +13,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.algolia.search.saas.AlgoliaException;
+import com.algolia.search.saas.Client;
+import com.algolia.search.saas.CompletionHandler;
+import com.algolia.search.saas.Index;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,8 +43,12 @@ import com.google.firebase.functions.FirebaseFunctionsException;
 import com.google.firebase.functions.HttpsCallableResult;
 import com.onethatsinspired.fire.databinding.ActivityAdddataBinding;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -73,6 +82,12 @@ public class AddDataActivity extends AppCompatActivity
 
     private ActivityAdddataBinding activityAdddataBinding;
 
+    Client client;
+
+    Index index;
+
+
+
 
     @Override
     public  void onCreate(Bundle savedInstanceState)
@@ -85,6 +100,11 @@ public class AddDataActivity extends AppCompatActivity
         //View view = activityAdddataBinding.getRoot();
 
         setContentView(R.layout.activity_adddata);
+
+
+        client = new Client("4FW4PHPOL5", "709954ad213a5f950da58271d7542581");
+
+        index = client.getIndex("podcast");
 
 
 
@@ -154,26 +174,32 @@ public class AddDataActivity extends AppCompatActivity
                     case(0):
                         textViewMode.setText("Add Podcast");
                         collection = "podcast";
+                        index = client.getIndex("podcast");
                         break;
                     case(1):
                         textViewMode.setText("Add Youtube Channel");
                         collection = "youtube";
+                        index = client.getIndex("youtube");
                         break;
                     case(2):
                         textViewMode.setText("Add Book");
                         collection = "book";
+                        index = client.getIndex("book");
                         break;
                     case(3):
                         textViewMode.setText("Add Pro");
                         collection = "pro";
+                        index = client.getIndex("pro");
                         break;
                     case(4):
                         textViewMode.setText("Add Blog");
                         collection = "blog";
+                        index = client.getIndex("blog");
                         break;
                         default:
                             textViewMode.setText("Add Podcast");
                             collection = "podcast";
+                            index = client.getIndex("podcast");
                             break;
                 }
             }
@@ -208,11 +234,13 @@ public class AddDataActivity extends AppCompatActivity
 
     }
 
-
+    String objectID;
 
     private void submitToDatabase()
     {
-        Map<String, Object> dbInput = new HashMap<>();
+        final Map<String, Object> dbInput = new HashMap<>();
+
+
 
         dbInput.put("name", editTextName.getText().toString());
 
@@ -226,15 +254,19 @@ public class AddDataActivity extends AppCompatActivity
 
         dbInput.put("type", collection);
 
+        Random random = new Random();
 
+        final String randomNumber = String.valueOf(random.nextInt(500000000));
+
+        index.addObjectAsync(new JSONObject(dbInput), randomNumber, null);
+
+        dbInput.put("objectid", randomNumber);
 
         db.collection(collection).add(dbInput).addOnSuccessListener(new OnSuccessListener<DocumentReference>()
         {
             @Override
             public void onSuccess(final DocumentReference documentReference)
             {
-
-
 
                 documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
                 {

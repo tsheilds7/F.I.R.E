@@ -40,31 +40,34 @@ public class ForgotPassWordActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                auth.sendPasswordResetEmail(editText.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>()
+                if(!emailAddress.isEmpty())
                 {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task)
+                    auth.sendPasswordResetEmail(editText.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>()
                     {
-                        if(task.isSuccessful())
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task)
                         {
-                            Log.d(null,"Email sent.");
-                            Toast toast = Toast.makeText(getApplicationContext(),"Email sent!",Toast.LENGTH_SHORT);
-                            View v = toast.getView();
-                            // v.setBackgroundColor(Color.parseColor("#6200EE"));
+                            if (task.isSuccessful())
+                            {
+                                Log.d(null, "Email sent.");
+                                Toast toast = Toast.makeText(getApplicationContext(), "Email sent!", Toast.LENGTH_SHORT);
+                                View v = toast.getView();
+                                // v.setBackgroundColor(Color.parseColor("#6200EE"));
 
-                            //Gets the actual oval background of the Toast then sets the colour filter
-                            v.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+                                //Gets the actual oval background of the Toast then sets the colour filter
+                                v.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
 
-                            //Gets the TextView from the Toast so it can be editted
-                            TextView text = v.findViewById(android.R.id.message);
-                            text.setTextColor(Color.WHITE);
-                            text.setTextSize(24);
-                            toast.show();
+                                //Gets the TextView from the Toast so it can be editted
+                                TextView text = v.findViewById(android.R.id.message);
+                                text.setTextColor(Color.WHITE);
+                                text.setTextSize(24);
+                                toast.show();
 
-                            goBack();
+                                goBack();
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
 
@@ -74,6 +77,7 @@ public class ForgotPassWordActivity extends AppCompatActivity
     public  void goBack()
     {
         Intent i = new Intent(this, SplashActivitySignIn.class);
+
         startActivity(i);
     }
 

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlack"
-    android:backgroundTint="@color/colorBlack"
+    android:background="@color/colorSilver"
+    android:backgroundTint="@color/colorSilver"
     tools:context=".ForgotPassWordActivity">
 
     <TextView
@@ -22,19 +22,21 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:textSize="24sp" />
 
     <EditText
         android:id="@+id/editTextEmailPReset"
         android:layout_width="304dp"
         android:layout_height="69dp"
+        android:backgroundTint="@color/colorPurple"
         android:ems="10"
         android:fontFamily="@font/alegreya_black_italic"
         android:hint="@string/email"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:textColor="@color/colorPurple"
-        android:textColorHint="@color/colorPurple"
+        android:textColorHint="#5E000000"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonResetPassword"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,10 +50,10 @@
         android:id="@+id/buttonResetPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorWhite"
+        android:background="@drawable/rounded_button"
         android:fontFamily="@font/alegreya_black_italic"
         android:text="@string/reset"
-        android:textColor="@color/colorPurple"
+        android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

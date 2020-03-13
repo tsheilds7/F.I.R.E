@@ -1,49 +1,46 @@
 package com.onethatsinspired.fire;
 
-import android.app.DownloadManager;
+
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.algolia.search.saas.AlgoliaException;
+import com.algolia.search.saas.Client;
+import com.algolia.search.saas.CompletionHandler;
+import com.algolia.search.saas.Index;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.onethatsinspired.fire.databinding.ActivityHomeBinding;
 
-import android.view.View;
+import com.onethatsinspired.fire.viewmodels.FireViewModel;
+import com.onethatsinspired.fire.adapters.*;
+
 import android.widget.SearchView;
-import android.widget.Toast;
 
-import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class HomeActivity extends AppCompatActivity implements PodcastFragment.OnFragmentInteractionListener,YoutubeFragment.OnFragmentInteractionListener,
@@ -69,6 +66,10 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
     Menu mainMenu;
 
     CoordinatorLayout coordinatorLayout;
+
+    Client client;
+
+    Index index;
 
     @Override
     public  void onCreate(Bundle savedInstanceState)
@@ -98,6 +99,11 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
 
          coordinatorLayout = findViewById(R.id.homeLayout);
 
+         client = new Client("4FW4PHPOL5", "709954ad213a5f950da58271d7542581");
+
+         index = client.getIndex("podcast");
+
+
      }
 
     @Override
@@ -122,9 +128,9 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
 
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
 
-        ImageView v = searchView.findViewById(searchImgId);
+        ImageView searchButtonImage = searchView.findViewById(searchImgId);
 
-        v.setImageResource(R.drawable.sharp_search_white_18dp);
+        searchButtonImage.setImageResource(R.drawable.sharp_search_white_18dp);
 
         //final PodcastFragment podcastFragment = (PodcastFragment)getSupportFragmentManager().getFragments().get(0);
 
@@ -167,6 +173,8 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
                                     homeAdapter.podcastFragment.fireViewModelList.clear();
                                     homeAdapter.podcastFragment.adapter.notifyDataSetChanged();
 
+
+
                                    for (DocumentSnapshot documentSnapshot : task.getResult())
                                    {
                                        FireViewModel fireViewModel = new FireViewModel(
@@ -174,7 +182,8 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
                                                documentSnapshot.getString("avgrating"),
                                                documentSnapshot.getString("link"),
                                                documentSnapshot.getString("name"),
-                                               documentSnapshot.getString("type"));
+                                               documentSnapshot.getString("type"),
+                                               null);
 
                                        homeAdapter.podcastFragment.fireViewModelList.add(fireViewModel);
                                    }
@@ -197,7 +206,8 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
                                                 documentSnapshot.getString("avgrating"),
                                                 documentSnapshot.getString("link"),
                                                 documentSnapshot.getString("name"),
-                                                documentSnapshot.getString("type"));
+                                                documentSnapshot.getString("type"),
+                                                null);
 
                                         homeAdapter.youtubeFragment.fireViewModelList.add(fireViewModel);
                                     }
@@ -219,7 +229,8 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
                                                 documentSnapshot.getString("avgrating"),
                                                 documentSnapshot.getString("link"),
                                                 documentSnapshot.getString("name"),
-                                                documentSnapshot.getString("type"));
+                                                documentSnapshot.getString("type"),
+                                                null);
 
                                         homeAdapter.booksFragment.fireViewModelList.add(fireViewModel);
                                     }
@@ -241,7 +252,8 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
                                                 documentSnapshot.getString("avgrating"),
                                                 documentSnapshot.getString("link"),
                                                 documentSnapshot.getString("name"),
-                                                documentSnapshot.getString("type"));
+                                                documentSnapshot.getString("type"),
+                                                null);
 
                                         homeAdapter.prosFragment.fireViewModelList.add(fireViewModel);
                                     }
@@ -263,7 +275,8 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
                                                 documentSnapshot.getString("avgrating"),
                                                 documentSnapshot.getString("link"),
                                                 documentSnapshot.getString("name"),
-                                                documentSnapshot.getString("type"));
+                                                documentSnapshot.getString("type"),
+                                                null);
 
                                         homeAdapter.blogsFragment.fireViewModelList.add(fireViewModel);
                                     }
@@ -295,7 +308,21 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
             @Override
             public boolean onQueryTextChange(String query)
             {
+                com.algolia.search.saas.Query query1 = new com.algolia.search.saas.Query(query)
+                        .setAttributesToRetrieve("name","about","type","link","avgrating")
+                        .setHitsPerPage(50);
 
+                index.searchAsync(query1, new CompletionHandler()
+                {
+                    @Override
+                    public void requestCompleted(@Nullable JSONObject jsonObject, @Nullable AlgoliaException e)
+                    {
+                        Log.e("Search", jsonObject.toString());
+
+                        searchAdapterSwitcher(jsonObject,tabLayout.getSelectedTabPosition());
+
+                    }
+                });
                 return true;
             }
 
@@ -396,9 +423,29 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
             {
                 viewPager.setCurrentItem(tab.getPosition());
 
-                //PodcastFragment podcastFragment = (PodcastFragment)getSupportFragmentManager().getFragments().get(tab.getPosition());
 
-               // podcastFragment.resetFragment(tab.getPosition());
+                switch (tab.getPosition())
+                {
+                    case 0:
+                        index = client.getIndex("podcast");
+                        break;
+                    case 1:
+                        index = client.getIndex("youtube");
+                        break;
+                    case 2:
+                        index = client.getIndex("book");
+                        break;
+                    case 3:
+                        index = client.getIndex("pro");
+                        break;
+                    case 4:
+                        index = client.getIndex("blog");
+                        break;
+                    default:
+                        index = client.getIndex("podcast");
+                        break;
+                }
+
             }
 
 
@@ -479,4 +526,167 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
 
         //adapter.notifyDataSetChanged();
     }
+
+    public  void searchAdapterSwitcher(JSONObject content, int tabPosition)
+    {
+        switch (tabPosition)
+        {
+            case 0:
+                homeAdapter.podcastFragment.fireViewModelList.clear();
+                homeAdapter.podcastFragment.adapter.notifyDataSetChanged();
+
+                try
+                {
+                    JSONArray  hits = content.getJSONArray("hits");
+
+                    for(int i = 0; i < hits.length(); i++)
+                    {
+                        JSONObject jsonObject = hits.getJSONObject(i);
+                        String about = jsonObject.getString("about");
+                        String avgrating = jsonObject.getString("avgrating");
+                        String link = jsonObject.getString("link");
+                        String name = jsonObject.getString("name");
+                        String type = jsonObject.getString("type");
+                        FireViewModel fireViewModel  = new FireViewModel(about,avgrating,link,name,type,null);
+
+                        homeAdapter.podcastFragment.fireViewModelList.add(fireViewModel);
+                    }
+                    adapter = new RecyclerAdapter(HomeActivity.this, homeAdapter.podcastFragment.fireViewModelList);
+
+                    homeAdapter.podcastFragment.recyclerView.setAdapter(adapter);
+                }
+                catch(JSONException e)
+                {
+                    e.printStackTrace();
+                }
+
+
+
+                break;
+            case 1:
+                homeAdapter.youtubeFragment.fireViewModelList.clear();
+                homeAdapter.youtubeFragment.adapter.notifyDataSetChanged();
+
+                try
+                {
+                    JSONArray  hits = content.getJSONArray("hits");
+
+                    for(int i = 0; i < hits.length(); i++)
+                    {
+                        JSONObject jsonObject = hits.getJSONObject(i);
+                        String about = jsonObject.getString("about");
+                        String avgrating = jsonObject.getString("avgrating");
+                        String link = jsonObject.getString("link");
+                        String name = jsonObject.getString("name");
+                        String type = jsonObject.getString("type");
+                        FireViewModel fireViewModel  = new FireViewModel(about,avgrating,link,name,type,null);
+
+                        homeAdapter.youtubeFragment.fireViewModelList.add(fireViewModel);
+                    }
+                    adapter = new RecyclerAdapter(HomeActivity.this, homeAdapter.youtubeFragment.fireViewModelList);
+
+                    homeAdapter.youtubeFragment.recyclerView.setAdapter(adapter);
+                }
+                catch(JSONException e)
+                {
+                    e.printStackTrace();
+                }
+                break;
+            case 2:
+                homeAdapter.booksFragment.fireViewModelList.clear();
+                homeAdapter.booksFragment.adapter.notifyDataSetChanged();
+
+                try
+                {
+                    JSONArray  hits = content.getJSONArray("hits");
+
+                    for(int i = 0; i < hits.length(); i++)
+                    {
+                        JSONObject jsonObject = hits.getJSONObject(i);
+                        String about = jsonObject.getString("about");
+                        String avgrating = jsonObject.getString("avgrating");
+                        String link = jsonObject.getString("link");
+                        String name = jsonObject.getString("name");
+                        String type = jsonObject.getString("type");
+
+                        FireViewModel fireViewModel  = new FireViewModel(about,avgrating,link,name,type, null);
+
+                        homeAdapter.booksFragment.fireViewModelList.add(fireViewModel);
+                    }
+                    adapter = new RecyclerAdapter(HomeActivity.this, homeAdapter.booksFragment.fireViewModelList);
+
+                    homeAdapter.booksFragment.recyclerView.setAdapter(adapter);
+                }
+                catch(JSONException e)
+                {
+                    e.printStackTrace();
+                }
+
+                break;
+            case 3:
+                homeAdapter.prosFragment.fireViewModelList.clear();
+                homeAdapter.prosFragment.adapter.notifyDataSetChanged();
+
+                try
+                {
+                    JSONArray  hits = content.getJSONArray("hits");
+
+                    for(int i = 0; i < hits.length(); i++)
+                    {
+                        JSONObject jsonObject = hits.getJSONObject(i);
+                        String about = jsonObject.getString("about");
+                        String avgrating = jsonObject.getString("avgrating");
+                        String link = jsonObject.getString("link");
+                        String name = jsonObject.getString("name");
+                        String type = jsonObject.getString("type");
+                        FireViewModel fireViewModel  = new FireViewModel(about,avgrating,link,name,type, null);
+
+                        homeAdapter.prosFragment.fireViewModelList.add(fireViewModel);
+                    }
+                    adapter = new RecyclerAdapter(HomeActivity.this, homeAdapter.prosFragment.fireViewModelList);
+
+                    homeAdapter.prosFragment.recyclerView.setAdapter(adapter);
+                }
+                catch(JSONException e)
+                {
+                    e.printStackTrace();
+                }
+
+
+                break;
+            case 4:
+                homeAdapter.blogsFragment.fireViewModelList.clear();
+                homeAdapter.blogsFragment.adapter.notifyDataSetChanged();
+
+                try
+                {
+                    JSONArray  hits = content.getJSONArray("hits");
+
+                    for(int i = 0; i < hits.length(); i++)
+                    {
+                        JSONObject jsonObject = hits.getJSONObject(i);
+                        String about = jsonObject.getString("about");
+                        String avgrating = jsonObject.getString("avgrating");
+                        String link = jsonObject.getString("link");
+                        String name = jsonObject.getString("name");
+                        String type = jsonObject.getString("type");
+                        FireViewModel fireViewModel  = new FireViewModel(about,avgrating,link,name,type, null);
+
+                        homeAdapter.blogsFragment.fireViewModelList.add(fireViewModel);
+                    }
+                    adapter = new RecyclerAdapter(HomeActivity.this, homeAdapter.blogsFragment.fireViewModelList);
+
+                    homeAdapter.blogsFragment.recyclerView.setAdapter(adapter);
+                }
+                catch(JSONException e)
+                {
+                    e.printStackTrace();
+                }
+
+
+                break;
+        }
+
+    }
+
 }

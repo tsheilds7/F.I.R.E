@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -22,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.onethatsinspired.fire.databinding.FragmentBooksBinding;
+import com.onethatsinspired.fire.viewmodels.FireViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +87,8 @@ public class BooksFragment extends Fragment
                             documentSnapshot.getString("avgrating"),
                             documentSnapshot.getString("link"),
                             documentSnapshot.getString("name"),
-                            documentSnapshot.getString("type"));
+                            documentSnapshot.getString("type"),
+                            null);
 
                     fireViewModelList.add(fireViewModel);
                 }

@@ -18,6 +18,7 @@
             android:title="@string/add"
             android:visible="true"
             app:showAsAction="always|withText" />
+
         <item
             android:id="@+id/action_settings"
             android:icon="@drawable/sharp_settings_white_24dp"
