@@ -11,7 +11,7 @@
 
     <Button
         android:id="@+id/buttonSignIn"
-        android:layout_width="85dp"
+        android:layout_width="115dp"
         android:layout_height="50dp"
         android:background="@drawable/rounded_button"
         android:fontFamily="@font/alegreya_black_italic"
@@ -41,7 +41,7 @@
         android:id="@+id/editTextEmailPReset"
         android:layout_width="304dp"
         android:layout_height="102dp"
-        android:backgroundTint="@color/colorPurple"
+        android:backgroundTint="#E4E4E4"
         android:backgroundTintMode="src_over"
         android:ems="10"
         android:fontFamily="@font/alegreya_black_italic"
@@ -60,7 +60,7 @@
     <Button
         android:id="@+id/buttonSignUn"
         style="@style/FirebaseUI.Button"
-        android:layout_width="85dp"
+        android:layout_width="115dp"
         android:layout_height="50dp"
         android:background="@drawable/rounded_button"
         android:fontFamily="@font/alegreya_black_italic"
@@ -80,7 +80,7 @@
         android:id="@+id/editTextPassword"
         android:layout_width="309dp"
         android:layout_height="105dp"
-        android:backgroundTint="@color/colorPurple"
+        android:backgroundTint="#E4E4E4"
         android:backgroundTintMode="src_over"
         android:ems="10"
         android:fontFamily="@font/alegreya_black_italic"
@@ -99,15 +99,17 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
+        android:background="#00FFFFFF"
         android:backgroundTint="#00FFFFFF"
         android:fontFamily="@font/alegreya_black_italic"
         android:onClick="passwordReset"
         android:text="Forgot Password?"
         android:textColor="#5E000000"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias=".894"
+        app:layout_constraintHorizontal_bias="0.888"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

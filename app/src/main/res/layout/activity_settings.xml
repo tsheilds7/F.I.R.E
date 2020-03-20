@@ -31,7 +31,7 @@
         android:layout_marginTop="32dp"
         android:fontFamily="@font/alegreya_black_italic"
         android:text="Profile"
-        android:textColor="@color/colorBlack"
+        android:textColor="#EFEFEF"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
-        android:background="@color/colorPurple"
+        android:background="#E4E4E4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -55,8 +55,8 @@
         android:layout_marginBottom="32dp"
         android:fontFamily="@font/alegreya_black_italic"
         android:text="Current Email"
-        android:textColor="@color/colorBlack"
-        android:textSize="18sp"
+        android:textColor="#F8F8F8"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias=".1"
@@ -68,9 +68,9 @@
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:layout_marginTop="64dp"
-        android:background="@color/colorPurple"
-        android:backgroundTint="@color/colorPurple"
-        android:foregroundTint="@color/colorPurple"
+        android:background="#E4E4E4"
+        android:backgroundTint="#E4E4E4"
+        android:foregroundTint="#E4E4E4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
@@ -89,15 +89,5 @@
         app:layout_constraintStart_toEndOf="@+id/fabBack"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".95" />
-
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="355dp"
-        android:layout_height="436dp"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

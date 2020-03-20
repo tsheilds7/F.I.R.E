@@ -2,9 +2,11 @@ package com.onethatsinspired.fire.controllers.views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,13 @@ import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleRegistry;
+import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,6 +39,8 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class ItemHolder extends RecyclerView.ViewHolder
 {
+
+    private LifecycleRegistry lifecycleRegistry;
 
     public RatingBar ratingBarAverage;
 
@@ -65,6 +75,8 @@ public class ItemHolder extends RecyclerView.ViewHolder
 
         textViewName = itemView.findViewById(R.id.itemName);
 
+        textViewName.setSelected(true);
+
         ratingBarAverage = itemView.findViewById(R.id.ratingBar);
 
         fIreRepo = new FIreRepo();
@@ -83,6 +95,8 @@ public class ItemHolder extends RecyclerView.ViewHolder
         homeActivity = (HomeActivity)itemView.getContext();
 
     }
+
+
 
     public  void resetData(View itemView)
     {
@@ -114,9 +128,12 @@ public class ItemHolder extends RecyclerView.ViewHolder
 
         view.getRootView().findViewById(R.id.action_settings).setEnabled(false);
 
-        //view.getRootView().setAlpha(0.35f);
+        view.getRootView().setAlpha(.3f);
 
-        homeActivity.coordinatorLayout.setAlpha(0.35f);
+        //homeActivity.coordinatorLayout.setAlpha(0.49f);
+        //homeActivity.coordinatorLayout.setVisibility(View.INVISIBLE);
+        //homeActivity.coordinatorLayout.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.colorBlack));
+
 
         // Inflate the custom layout/view
         final View popupView = inflater.inflate(R.layout.layout_itemdetail,null);
@@ -143,15 +160,20 @@ public class ItemHolder extends RecyclerView.ViewHolder
 
         TextView textViewAbout = popupView.findViewById(R.id.textViewDescription);
         textViewAbout.setTypeface(typeface);
+        textViewAbout.setSelected(true);
 
         TextView textViewName = popupView.findViewById(R.id.textViewName);
         textViewName.setTypeface(typeface);
+        textViewName.setSelected(true);
 
         TextView textViewRateThis = popupView.findViewById(R.id.textViewRateThis);
         textViewRateThis.setTypeface(typeface);
 
         Button buttonSubmitRating = popupView.findViewById(R.id.buttonSubmitRating);
         buttonSubmitRating.setTypeface(typeface);
+
+        TextView textViewAvgRating = popupView.findViewById(R.id.averagerating);
+        textViewAvgRating.setTypeface(typeface);
 
         final String link = ultraLink;
 
@@ -163,7 +185,7 @@ public class ItemHolder extends RecyclerView.ViewHolder
 
         textViewName.setText(name);
 
-        textViewLiink.setText(link);
+        //textViewLiink.setText(link);
 
         textViewAbout.setText(about);
 
@@ -216,9 +238,7 @@ public class ItemHolder extends RecyclerView.ViewHolder
 
                         RatingBar newRatingBar = popupView.findViewById(R.id.ratingBarSubmit);
 
-                       fIreRepo.addRating(ItemHolder.this, documentReference,(int)newRatingBar.getRating());
-
-                        homeActivity.resetRecyclerAdapter(getLayoutPosition());
+                        fIreRepo.addRating(homeActivity, documentReference,(int)newRatingBar.getRating());
 
                         ratingBarAvgInfo.setRating(Integer.parseInt(ultraRating));
 
@@ -238,9 +258,14 @@ public class ItemHolder extends RecyclerView.ViewHolder
     {
         view.setVisibility(View.VISIBLE);
 
-        //view.getRootView().setAlpha(1.0f);
+        view.getRootView().setAlpha(1.0f);
 
-        homeActivity.coordinatorLayout.setAlpha(1.0f);
+        //homeActivity.coordinatorLayout.setAlpha(1.0f);
+        //homeActivity.coordinatorLayout.setVisibility(View.VISIBLE);
+        //homeActivity.coordinatorLayout.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.colorSilver));
+
+
+
 
         tabLayout.getTabAt(0).view.setEnabled(true);
 

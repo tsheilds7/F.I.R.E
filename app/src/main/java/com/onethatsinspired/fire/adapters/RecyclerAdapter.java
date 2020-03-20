@@ -9,8 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleRegistry;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.onethatsinspired.fire.controllers.activities.HomeActivity;
 import com.onethatsinspired.fire.controllers.views.ItemHolder;
 import com.onethatsinspired.fire.R;
@@ -18,21 +21,15 @@ import com.onethatsinspired.fire.viewmodels.FireViewModel;
 
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<ItemHolder>
+
+
+public class RecyclerAdapter extends FirestoreRecyclerAdapter<FireViewModel,ItemHolder>
 {
 
-    Context context;
 
     HomeActivity homeActivity;
 
     List<FireViewModel> fireViewModelList;
-
-    public RecyclerAdapter(HomeActivity homeActivity, List<FireViewModel> fireviewModelList)
-    {
-        this.homeActivity = homeActivity;
-
-        this.fireViewModelList = fireviewModelList;
-    }
 
     /**** View Holder Functions ****/
 
@@ -45,35 +42,33 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ItemHolder>
         return new ItemHolder(v);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ItemHolder holder, int position)
+
+    public RecyclerAdapter(@NonNull FirestoreRecyclerOptions<FireViewModel> options)
     {
-        holder.textViewName.setText(fireViewModelList.get(position).getName());
-
-        holder.ratingBarAverage.setRating(Integer.parseInt(fireViewModelList.get(position).getAvgRating()));
-
-        holder.ultraName = fireViewModelList.get(position).getName();
-
-        holder.ultraRating = fireViewModelList.get(position).getAvgRating();
-
-        holder.ultraLink = fireViewModelList.get(position).getLink();
-
-        holder.ultraAbout = fireViewModelList.get(position).getAbout();
-
-        holder.ultraType = fireViewModelList.get(position).getType();
-
-        holder.ultraId = fireViewModelList.get(position).getType();
+        super(options);
     }
+
 
     @Override
-    public int getItemCount()
+    protected void onBindViewHolder(@NonNull ItemHolder itemHolder, int i, @NonNull FireViewModel fireViewModel)
     {
-        return fireViewModelList.size();
+        itemHolder.textViewName.setText(fireViewModel.getName());
+
+        itemHolder.ratingBarAverage.setRating(Integer.parseInt(fireViewModel.getAvgRating()));
+
+        itemHolder.ultraName = fireViewModel.getName();
+
+        itemHolder.ultraRating = fireViewModel.getAvgRating();
+
+        itemHolder.ultraLink = fireViewModel.getLink();
+
+        itemHolder.ultraAbout = fireViewModel.getAbout();
+
+        itemHolder.ultraType = fireViewModel.getType();
+
+        itemHolder.ultraId = fireViewModel.getType();
+
     }
 
-    public  void reset()
-    {
-        notifyDataSetChanged();
-    }
 
 }

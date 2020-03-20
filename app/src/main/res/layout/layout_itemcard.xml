@@ -27,22 +27,29 @@
         android:background="@color/colorPurple"
         android:padding="16dp">
 
+
         <TextView
-
             android:id="@+id/itemName"
-
-            android:layout_width="236dp"
-
-            android:layout_height="39dp"
-
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:fontFamily="@font/alegreya_black_italic"
-            android:gravity="center"
+            android:gravity="center_horizontal"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             android:textColor="@color/colorWhite"
             android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/ratingBar"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/cities" />
+
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -55,6 +62,7 @@
             android:progressTint="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itemName" />
 

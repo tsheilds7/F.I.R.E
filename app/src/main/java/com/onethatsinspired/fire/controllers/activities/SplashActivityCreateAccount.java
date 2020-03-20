@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -127,6 +130,26 @@ public class SplashActivityCreateAccount extends AppCompatActivity
                     }
                 }
             });
+        }
+        else
+        {
+            Toast toast = Toast.makeText(this,"Please fill out all fields!",Toast.LENGTH_SHORT);
+
+            View v = toast.getView();
+
+            // v.setBackgroundColor(Color.parseColor("#6200EE"));
+
+            //Gets the actual oval background of the Toast then sets the colour filter
+            v.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+
+            //Gets the TextView from the Toast so it can be edited
+            TextView text = v.findViewById(android.R.id.message);
+
+            text.setTextColor(Color.WHITE);
+
+            text.setTextSize(18);
+
+            toast.show();
         }
 
     }

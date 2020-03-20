@@ -1,5 +1,9 @@
 package com.onethatsinspired.fire.viewmodels;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,8 +25,6 @@ public class FireViewModel extends ViewModel
 
     private  String name;
 
-    private String objectid;
-
     private  String type;
 
     public  FireViewModel()
@@ -30,7 +32,7 @@ public class FireViewModel extends ViewModel
 
     }
 
-    public FireViewModel(String about, String avgrating, String link, String name, String type, @Nullable String objectid)
+    public FireViewModel(String about, String avgrating, String link, String name, String type)
     {
         this.about = about;
 
@@ -41,8 +43,6 @@ public class FireViewModel extends ViewModel
         this.name = name;
 
         this.type = type;
-
-        this.objectid = objectid;
     }
 
     public String getAbout() { return about; }
@@ -58,5 +58,5 @@ public class FireViewModel extends ViewModel
 
     public String getType() { return type; }
 
-    public String getObjectID() {return objectid;}
+
 }

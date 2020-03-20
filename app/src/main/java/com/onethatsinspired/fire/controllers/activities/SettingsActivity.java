@@ -9,8 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,7 +21,7 @@ public class SettingsActivity extends AppCompatActivity
 
     private FirebaseAuth mAuth;
 
-    private AdView adview;
+
 
     FloatingActionButton floatingActionButton;
 
@@ -40,12 +39,6 @@ public class SettingsActivity extends AppCompatActivity
         setContentView(view);
 
         setContentView(R.layout.activity_settings);
-
-        adview = findViewById(R.id.adView);
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        adview.loadAd((adRequest));
 
         mAuth = FirebaseAuth.getInstance();
 

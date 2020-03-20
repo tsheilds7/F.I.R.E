@@ -11,129 +11,212 @@
     android:elevation="15dp"
     app:layout_constraintCircleRadius="15dp">
 
-    <TextView
-        android:id="@+id/textViewName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:fontFamily="@font/alegreya_black_italic"
-        android:text="@string/textview"
-        android:textColor="@color/colorWhite"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewLink"
+    <View
+        android:id="@+id/divider11"
+        android:layout_width="369dp"
+        android:layout_height="1dp"
+        android:background="#E4E4E4"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSubmitRating"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarSubmit" />
+
+    <View
+        android:id="@+id/divider9"
+        android:layout_width="369dp"
+        android:layout_height="1dp"
+        android:background="#E4E4E4"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarAverageInfo" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:fontFamily="@font/alegreya_black_italic"
+        android:gravity="center_horizontal"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textColor="#EFEFEF"
+        android:textSize="24sp"
+
+        app:layout_constraintBottom_toTopOf="@+id/divider3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:fontFamily="@font/alegreya_black_italic"
         android:gravity="center|center_horizontal"
-        android:text="@string/textview"
-        android:textColor="#05DFFF"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/ratingBarAverageInfo"
+        android:text="Click to go to Link"
+        android:textColor="#03C3DF"
+        android:textSize="24sp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        app:layout_constraintBottom_toTopOf="@+id/divider4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewName"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
     <RatingBar
         android:id="@+id/ratingBarAverageInfo"
         style="@style/Widget.AppCompat.RatingBar"
         android:layout_width="244dp"
         android:layout_height="51dp"
-        android:layout_margin="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:isIndicator="true"
         android:progressBackgroundTint="@color/colorBlack"
         android:progressTint="@color/colorWhite"
         android:stepSize="1"
-        app:layout_constraintBottom_toTopOf="@+id/textViewDescription"
+        app:layout_constraintBottom_toTopOf="@+id/divider9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLink"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintTop_toBottomOf="@+id/averagerating" />
 
     <TextView
         android:id="@+id/textViewDescription"
         android:layout_width="353dp"
         android:layout_height="131dp"
-        android:layout_margin="15dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:fontFamily="@font/alegreya_black_italic"
         android:gravity="center"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewRateThis"
+        android:textColor="#EFEFEF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/divider10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBarAverageInfo"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintTop_toBottomOf="@+id/divider9" />
 
     <TextView
         android:id="@+id/textViewRateThis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/alegreya_black_italic"
         android:text="@string/rate_this"
-        android:textColor="@color/colorWhite"
+        android:textColor="#EFEFEF"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/ratingBarSubmit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintTop_toBottomOf="@+id/divider10" />
 
     <RatingBar
         android:id="@+id/ratingBarSubmit"
         android:layout_width="244dp"
         android:layout_height="45dp"
-        android:layout_margin="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:progressBackgroundTint="@color/colorBlack"
         android:progressTint="@color/colorWhite"
         android:stepSize="1"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSubmitRating"
+        app:layout_constraintBottom_toTopOf="@+id/divider11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRateThis"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRateThis" />
 
     <Button
         android:id="@+id/buttonSubmitRating"
-        android:layout_width="110dp"
-        android:layout_height="56dp"
-        android:layout_margin="15dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="150dp"
+        android:layout_height="35dp"
         android:background="@drawable/rounded_button"
+        android:elevation="60sp"
         android:fontFamily="@font/alegreya_black_italic"
+        android:outlineAmbientShadowColor="#070707"
         android:padding="5dp"
+        android:shadowRadius="5000"
+        android:singleLine="true"
         android:text="@string/submit_rating"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintCircleRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBarSubmit"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintTop_toBottomOf="@+id/divider11"
+        tools:layout_constraintCircleRadius="15dp" />
 
     <Button
         android:id="@+id/fabClose"
-        android:layout_width="62dp"
-        android:layout_height="46dp"
-        android:background="@drawable/rounded_button"
-        android:foreground="@drawable/sharp_close_white_18dp"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="#00FFFFFF"
+        android:backgroundTint="#00FFFFFF"
+        android:foreground="@drawable/sharp_arrow_back_white_18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonSubmitRating"
-        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBarSubmit"
-        app:layout_constraintVertical_bias=".7" />
+        app:layout_constraintTop_toBottomOf="@+id/divider11" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="369dp"
+        android:layout_height="1dp"
+        android:background="#E4E4E4"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLink"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="369dp"
+        android:layout_height="1dp"
+        android:background="#E4E4E4"
+        app:layout_constraintBottom_toTopOf="@+id/averagerating"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLink" />
+
+    <View
+        android:id="@+id/divider10"
+        android:layout_width="369dp"
+        android:layout_height="1dp"
+        android:background="#E4E4E4"
+        app:layout_constraintBottom_toTopOf="@+id/textViewRateThis"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
+
+    <TextView
+        android:id="@+id/averagerating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/alegreya_black_italic"
+        android:text="Average Rating"
+        android:textColor="#EFEFEF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/ratingBarAverageInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
