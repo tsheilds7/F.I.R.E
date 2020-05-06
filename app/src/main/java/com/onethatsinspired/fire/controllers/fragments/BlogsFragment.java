@@ -19,8 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import com.onethatsinspired.fire.R;
-import com.onethatsinspired.fire.adapters.RecyclerAdapter;
-import com.onethatsinspired.fire.controllers.activities.HomeActivity;
+import com.onethatsinspired.fire.adapters.FirebaseRecyclerAdapter;
 import com.onethatsinspired.fire.databinding.FragmentBlogsBinding;
 import com.onethatsinspired.fire.repositories.FIreRepo;
 import com.onethatsinspired.fire.viewmodels.FireViewModel;
@@ -49,7 +48,7 @@ public class BlogsFragment extends Fragment
 
      RecyclerView.LayoutManager layoutManager;
 
-    public RecyclerAdapter adapter;
+    public FirebaseRecyclerAdapter adapter;
 
     public List<FireViewModel> fireViewModelList = new ArrayList<>();
 
@@ -106,12 +105,17 @@ public class BlogsFragment extends Fragment
 
     public void setUpRecycler(FirestoreRecyclerOptions<FireViewModel> options)
     {
-        adapter = new RecyclerAdapter(options);
+        adapter = new FirebaseRecyclerAdapter(options);
 
         recyclerView.setHasFixedSize(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void resetAdapter()
+    {
         recyclerView.setAdapter(adapter);
     }
 

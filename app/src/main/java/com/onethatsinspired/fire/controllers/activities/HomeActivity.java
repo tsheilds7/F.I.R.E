@@ -12,8 +12,10 @@ import android.widget.ImageView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewpager.widget.ViewPager;
 
@@ -29,7 +31,7 @@ import com.onethatsinspired.fire.R;
 
 import com.onethatsinspired.fire.adapters.HomePagerAdapter;
 
-import com.onethatsinspired.fire.adapters.RecyclerAdapter;
+import com.onethatsinspired.fire.adapters.FirebaseRecyclerAdapter;
 
 import com.onethatsinspired.fire.controllers.fragments.BlogsFragment;
 import com.onethatsinspired.fire.controllers.fragments.BooksFragment;
@@ -39,18 +41,13 @@ import com.onethatsinspired.fire.controllers.fragments.YoutubeFragment;
 import com.onethatsinspired.fire.repositories.FIreRepo;
 
 
-import android.widget.SearchView;
-
-
-
-
 public class HomeActivity extends AppCompatActivity implements PodcastFragment.OnFragmentInteractionListener, YoutubeFragment.OnFragmentInteractionListener,
         BooksFragment.OnFragmentInteractionListener, ProsFragment.OnFragmentInteractionListener, BlogsFragment.OnFragmentInteractionListener
 {
 
     private FirebaseFirestore db;
 
-    private RecyclerAdapter adapter;
+    private FirebaseRecyclerAdapter adapter;
 
     private CollectionReference collectionReference;
 
@@ -64,7 +61,7 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
 
     Menu mainMenu;
 
-    public CoordinatorLayout coordinatorLayout;
+    public ConstraintLayout coordinatorLayout;
 
     Client client;
 
@@ -77,12 +74,6 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home);
-
-        //activityHomeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
-
-       // View view = activityHomeBinding.getRoot();
-
-        //setContentView(view);
 
         Toolbar toolbarTop = findViewById(R.id.toolbarTop);
 
@@ -121,37 +112,46 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
         // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
-        final SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        final androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) menu.findItem(R.id.search).getActionView();
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
+        //searchView.setIconifiedByDefault(false);
+
+        searchView.setSubmitButtonEnabled(false);
+
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
 
-        ImageView searchButtonImage = searchView.findViewById(searchImgId);
+      //  ImageView searchButtonImage = searchView.findViewById(searchImgId);
 
-        searchButtonImage.setImageResource(R.drawable.sharp_search_white_18dp);
+       // searchButtonImage.setImageResource(R.drawable.sharp_search_white_18dp);
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+       // ImageView closeButtonImage = searchView.findViewById(R.id.search_close_btn);
+
+        //closeButtonImage.setImageResource(R.drawable.sharp_search_white_18dp);
+
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener()
         {
+
+            FIreRepo fIreRepo = new FIreRepo();
 
             @Override
             public boolean onQueryTextSubmit(String query)
             {
-
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String query)
             {
-                FIreRepo fIreRepo = new FIreRepo();
-
-                fIreRepo.performAlgoliaSearch(tabLayout.getSelectedTabPosition(),index,query,homeAdapter     );
+                fIreRepo.performAlgoliaSearch(tabLayout.getSelectedTabPosition(),index,query,homeAdapter);
 
                 return true;
             }
 
         });
+
+
 
         searchView.setOnCloseListener(new SearchView.OnCloseListener()
         {
@@ -162,26 +162,19 @@ public class HomeActivity extends AppCompatActivity implements PodcastFragment.O
                 switch(tabLayout.getSelectedTabPosition())
                 {
                     case 0:
-                        homeAdapter.podcastFragment.adapter.notifyDataSetChanged();
-                        homeAdapter.podcastFragment.setUpRecycler(homeAdapter.podcastFragment.fIreRepo.setUpData(0));
+                        homeAdapter.podcastFragment.resetAdapter();
                         break;
                     case 1:
-                        homeAdapter.youtubeFragment.adapter.notifyDataSetChanged();
-                        homeAdapter.youtubeFragment.setUpRecycler(homeAdapter.youtubeFragment.fIreRepo.setUpData(1));
+                        homeAdapter.youtubeFragment.resetAdapter();
                         break;
                     case 2:
-                        //homeAdapter.booksFragment.fireViewModelList.clear();
-                        //homeAdapter.booksFragment.setUpRecycler(homeAdapter.booksFragment.fIreRepo.setUpData(2));
                         homeAdapter.booksFragment.resetAdapter();
-
                         break;
                     case 3:
-                        homeAdapter.prosFragment.adapter.notifyDataSetChanged();
-                        homeAdapter.prosFragment.setUpRecycler(homeAdapter.prosFragment.fIreRepo.setUpData(3));
+                        homeAdapter.prosFragment.resetAdapter();
                         break;
                     case 4:
-                        homeAdapter.blogsFragment.adapter.notifyDataSetChanged();
-                        homeAdapter.blogsFragment.setUpRecycler(homeAdapter.blogsFragment.fIreRepo.setUpData(4));
+                        homeAdapter.blogsFragment.resetAdapter();
                         break;
                 }
 

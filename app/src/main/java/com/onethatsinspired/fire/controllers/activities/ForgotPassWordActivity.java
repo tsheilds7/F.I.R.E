@@ -58,8 +58,11 @@ public class ForgotPassWordActivity extends AppCompatActivity
 
                                 //Gets the TextView from the Toast so it can be editted
                                 TextView text = v.findViewById(android.R.id.message);
+
                                 text.setTextColor(Color.WHITE);
+
                                 text.setTextSize(24);
+
                                 toast.show();
 
                                 goBack();
@@ -67,6 +70,15 @@ public class ForgotPassWordActivity extends AppCompatActivity
                         }
                     });
                 }
+            }
+        });
+
+        findViewById(R.id.buttonBackToSignIn).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                goBack();
             }
         });
 

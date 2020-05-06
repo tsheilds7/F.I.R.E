@@ -14,11 +14,8 @@ import android.view.ViewGroup;
 
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.onethatsinspired.fire.R;
-import com.onethatsinspired.fire.adapters.RecyclerAdapter;
-import com.onethatsinspired.fire.controllers.activities.HomeActivity;
+import com.onethatsinspired.fire.adapters.FirebaseRecyclerAdapter;
 import com.onethatsinspired.fire.databinding.FragmentPodcastBinding;
 import com.onethatsinspired.fire.repositories.FIreRepo;
 import com.onethatsinspired.fire.viewmodels.FireViewModel;
@@ -26,6 +23,7 @@ import com.onethatsinspired.fire.viewmodels.FireViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.onethatsinspired.fire.BR.FireVMPodcasts;
 import static com.onethatsinspired.fire.BR.FireVMPodcasts;
 
 /**
@@ -44,7 +42,7 @@ public class PodcastFragment extends Fragment
 
     RecyclerView.LayoutManager layoutManager;
 
-    public RecyclerAdapter adapter;
+    public FirebaseRecyclerAdapter adapter;
 
     public FIreRepo fIreRepo;
 
@@ -88,7 +86,7 @@ public class PodcastFragment extends Fragment
 
     public void setUpRecycler(FirestoreRecyclerOptions<FireViewModel> options)
     {
-        adapter = new RecyclerAdapter(options);
+        adapter = new FirebaseRecyclerAdapter(options);
 
         recyclerView.setHasFixedSize(true);
 

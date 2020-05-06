@@ -7,29 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LifecycleRegistry;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.onethatsinspired.fire.controllers.activities.HomeActivity;
 import com.onethatsinspired.fire.R;
-import com.onethatsinspired.fire.adapters.RecyclerAdapter;
+import com.onethatsinspired.fire.adapters.FirebaseRecyclerAdapter;
 import com.onethatsinspired.fire.databinding.FragmentYoutubeBinding;
 import com.onethatsinspired.fire.repositories.FIreRepo;
 import com.onethatsinspired.fire.viewmodels.FireViewModel;
@@ -52,7 +38,7 @@ public class YoutubeFragment extends Fragment
 
     RecyclerView.LayoutManager layoutManager;
 
-    public RecyclerAdapter adapter;
+    public FirebaseRecyclerAdapter adapter;
 
     public List<FireViewModel> fireViewModelList = new ArrayList<>();
 
@@ -104,7 +90,7 @@ public class YoutubeFragment extends Fragment
 
     public void setUpRecycler(FirestoreRecyclerOptions<FireViewModel> options)
     {
-        adapter = new RecyclerAdapter(options);
+        adapter = new FirebaseRecyclerAdapter(options);
 
         recyclerView.setHasFixedSize(true);
 
@@ -130,6 +116,11 @@ public class YoutubeFragment extends Fragment
     public interface OnFragmentInteractionListener
     {
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void resetAdapter()
+    {
+        recyclerView.setAdapter(adapter);
     }
 
 }

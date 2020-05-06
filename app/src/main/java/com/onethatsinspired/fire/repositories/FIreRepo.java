@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.algolia.search.saas.AlgoliaException;
 import com.algolia.search.saas.CompletionHandler;
@@ -29,7 +28,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.onethatsinspired.fire.adapters.AlgoliaRecyclerAdapter;
 import com.onethatsinspired.fire.adapters.HomePagerAdapter;
-import com.onethatsinspired.fire.adapters.RecyclerAdapter;
 import com.onethatsinspired.fire.controllers.activities.AddDataActivity;
 import com.onethatsinspired.fire.controllers.activities.HomeActivity;
 import com.onethatsinspired.fire.viewmodels.FireViewModel;

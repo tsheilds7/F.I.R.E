@@ -23,6 +23,7 @@
     <style name="CustomFont">
         <item name="android:fontFamily">@font/alegreya_black_italic</item>
         <item name="android:textSize">40sp</item>
+        <item name="color">@color/colorWhite</item>
     </style>
 
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">

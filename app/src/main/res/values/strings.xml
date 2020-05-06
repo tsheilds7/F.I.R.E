@@ -30,6 +30,10 @@
     <string name="please_enter_your_email_address_to_reset">Please Enter Your Email Address To Reset</string>
     <string name="email">Email:</string>
     <string name="reset">Reset</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="todo">TODO</string>
+
+
 
 
 </resources>

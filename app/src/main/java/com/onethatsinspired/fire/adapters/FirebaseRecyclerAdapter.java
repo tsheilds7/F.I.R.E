@@ -23,7 +23,7 @@ import java.util.List;
 
 
 
-public class RecyclerAdapter extends FirestoreRecyclerAdapter<FireViewModel,ItemHolder>
+public class FirebaseRecyclerAdapter extends FirestoreRecyclerAdapter<FireViewModel,ItemHolder>
 {
 
 
@@ -43,7 +43,7 @@ public class RecyclerAdapter extends FirestoreRecyclerAdapter<FireViewModel,Item
     }
 
 
-    public RecyclerAdapter(@NonNull FirestoreRecyclerOptions<FireViewModel> options)
+    public FirebaseRecyclerAdapter(@NonNull FirestoreRecyclerOptions<FireViewModel> options)
     {
         super(options);
     }
